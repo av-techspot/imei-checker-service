@@ -1,11 +1,11 @@
 from typing import Optional
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
-class IMEICheckRequest(BaseModel):
-    imei: str
-    token: str
+class IMEICheckCreateRequest(BaseModel):
+    device_id: str = Field(..., alias="deviceId", min_length=15, max_length=15)
+    service_id: int = Field(..., alias="serviceId", ge=1)
 
 
 class ServiceInfo(BaseModel):
