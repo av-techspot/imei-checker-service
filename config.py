@@ -6,7 +6,6 @@ class Settings(BaseSettings):
     api_port: int = 8040
 
     imeicheck_api_sandbox_token: str
-    imeicheck_api_live_token: str
 
     bot_token: str
 

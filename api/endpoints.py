@@ -1,15 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
-from fastapi.security import APIKeyHeader
+from fastapi import APIRouter, Depends, HTTPException, Header
 
+from api.schemas import IMEICheckResponse, IMEICheckCreateRequest
+from api.utils import check_imei
 from config import settings
-from schemas import IMEICheckResponse, IMEICheckCreateRequest
-from utils import check_imei
 
 api_router = APIRouter()
-security = APIKeyHeader(name="Authorization")
 
 
-async def authenticate(token: str = Depends(security)) -> bool:
+async def authenticate(token: str = Header(...)) -> bool:
     """Auth token check"""
     return token == settings.imeicheck_api_sandbox_token
 

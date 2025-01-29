@@ -1,7 +1,7 @@
 import httpx
 
+from api.schemas import IMEICheckResponse
 from config import settings
-from schemas import IMEICheckResponse
 
 
 async def check_imei(device_id: str, service_id: int = 12) -> IMEICheckResponse:
@@ -26,4 +26,5 @@ async def check_imei(device_id: str, service_id: int = 12) -> IMEICheckResponse:
 
             raise ValueError(error_details)
         except Exception as e:
-            raise ValueError(f"Ошибка при проверке IMEI: {str(e)}")
+            print(str(e))
+            raise ValueError(f"IMEI check error: {str(e)}")

@@ -4,7 +4,7 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI
 
-from api.api import api_router
+from api.endpoints import api_router
 from config import settings
 
 
