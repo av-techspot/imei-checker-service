@@ -9,14 +9,17 @@ api_router = APIRouter()
 
 async def authenticate(token: str = Header(...)) -> bool:
     """Auth token check"""
-    return token == settings.imeicheck_api_sandbox_token
+    return token == settings.IMEICHECK_API_SANDBOX_TOKEN
 
 
 @api_router.post("/check-imei", response_model=IMEICheckResponse)
-async def check_imei_endpoint(request: IMEICheckCreateRequest, auth: bool = Depends(authenticate)):
+async def check_imei_endpoint(body: IMEICheckCreateRequest, auth: bool = Depends(authenticate)):
     if not auth:
         raise HTTPException(status_code=403, detail="Invalid token")
     try:
-        return await check_imei(request.device_id, request.service_id)
+        return await check_imei(
+            device_id=body.device_id,
+            service_id=body.service_id
+        )
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

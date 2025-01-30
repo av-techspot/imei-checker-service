@@ -7,7 +7,7 @@ from config import settings
 async def check_imei(device_id: str, service_id: int = 12) -> IMEICheckResponse:
     url = "https://api.imeicheck.net/v1/checks"
     headers = {
-        "Authorization": f"Bearer {settings.imeicheck_api_sandbox_token}",
+        "Authorization": f"Bearer {settings.IMEICHECK_API_SANDBOX_TOKEN}",
         "Accept-Language": "en",
         "Content-Type": "application/json",
     }
